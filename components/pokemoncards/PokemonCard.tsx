@@ -4,21 +4,21 @@ import { View, Text, StyleSheet, Platform, Image } from "react-native";
 const getTypeDetails = (type: string) => {
   switch (type.toLowerCase()) {
     case "electric":
-      return { borderColor: "yellow", emoji: "⚡️" };
+      return { color: "orange", borderColor: "yellow", emoji: "⚡️" };
     case "fire":
-      return { borderColor: "red", emoji: "🔥" };
+      return { color: "red", borderColor: "red", emoji: "🔥" };
     case "water":
-      return { borderColor: "blue", emoji: "💧" };
+      return { color: "blue", borderColor: "blue", emoji: "💧" };
     case "grass":
-      return { borderColor: "green", emoji: "🌿" };
+      return { color: "green", borderColor: "green", emoji: "🌿" };
     case "bug":
-      return { borderColor: "green", emoji: "🐛" };
+      return { color: "green", borderColor: "green", emoji: "🐛" };
     case "poison":
-      return { borderColor: "purple", emoji: "☠️" };
+      return { color: "purple", borderColor: "purple", emoji: "☠️" };
     case "flying":
-      return { borderColor: "skyblue", emoji: "🕊" };
+      return { color: "skyblue", borderColor: "skyblue", emoji: "🕊" };
     default:
-      return { borderColor: "black", emoji: "❓" };
+      return { color: "black", borderColor: "black", emoji: "❓" };
   }
 };
 
@@ -37,12 +37,12 @@ export default function PokemonCard({
   moves: string[];
   weaknesses: string[];
 }) {
-  const { borderColor, emoji } = getTypeDetails(type);
+  const { color, borderColor, emoji } = getTypeDetails(type);
 
   return (
     <View style={styles.card}>
       <View style={styles.nameContainer}>
-        <Text style={styles.name}>{name}</Text>
+        <Text style={[styles.name, { color }]}>{name}</Text>
         <Text style={styles.hp}>❤{hp}</Text>
       </View>
 
@@ -134,14 +134,14 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   movesText: {
-    fontSize: 22,
-    fontWeight: "bold",
+    fontSize: 20,
+    fontWeight: "semibold",
   },
   weaknessContainer: {
     marginBottom: 8,
   },
   weaknessText: {
-    fontSize: 22,
-    fontWeight: "bold",
+    fontSize: 20,
+    fontWeight: "semibold",
   },
 });
