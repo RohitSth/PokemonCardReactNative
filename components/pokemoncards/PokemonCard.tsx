@@ -1,4 +1,27 @@
 import { View, Text, StyleSheet, Platform, Image } from "react-native";
+
+// Pokemon Type Details
+const getTypeDetails = (type: string) => {
+  switch (type.toLowerCase()) {
+    case "electric":
+      return { borderColor: "yellow", emoji: "⚡️" };
+    case "fire":
+      return { borderColor: "red", emoji: "🔥" };
+    case "water":
+      return { borderColor: "blue", emoji: "💧" };
+    case "grass":
+      return { borderColor: "green", emoji: "🌿" };
+    case "bug":
+      return { borderColor: "green", emoji: "🐛" };
+    case "poison":
+      return { borderColor: "purple", emoji: "☠️" };
+    case "flying":
+      return { borderColor: "skyblue", emoji: "🕊" };
+    default:
+      return { borderColor: "black", emoji: "❓" };
+  }
+};
+
 export default function PokemonCard({
   name,
   type,
@@ -14,6 +37,8 @@ export default function PokemonCard({
   moves: string[];
   weaknesses: string[];
 }) {
+  const { borderColor, emoji } = getTypeDetails(type);
+
   return (
     <View style={styles.card}>
       <View style={styles.nameContainer}>
@@ -28,14 +53,19 @@ export default function PokemonCard({
         resizeMode="contain"
       />
 
-      <View>
-        <Text>{type}</Text>
+      <View style={styles.typeContainer}>
+        <View style={[styles.badge, { borderColor }]}>
+          <Text style={styles.typeEmoji}>{emoji}</Text>
+          <Text style={styles.typeText}>{type}</Text>
+        </View>
       </View>
-      <View>
-        <Text>Moves: {moves.join(", ")}</Text>
+      <View style={styles.movesContainer}>
+        <Text style={styles.movesText}>Moves: {moves.join(", ")}</Text>
       </View>
-      <View>
-        <Text>Weakness: {weaknesses.join(", ")}</Text>
+      <View style={styles.weaknessContainer}>
+        <Text style={styles.weaknessText}>
+          Weakness: {weaknesses.join(", ")}
+        </Text>
       </View>
     </View>
   );
@@ -79,5 +109,39 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200,
     marginBottom: 16,
+  },
+  typeContainer: {
+    alignItems: "center",
+    marginBottom: 40,
+  },
+  badge: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+    borderWidth: 4,
+  },
+  typeEmoji: {
+    fontSize: 30,
+    marginRight: 12,
+  },
+  typeText: {
+    fontSize: 22,
+    fontWeight: "bold",
+  },
+  movesContainer: {
+    marginBottom: 16,
+  },
+  movesText: {
+    fontSize: 22,
+    fontWeight: "bold",
+  },
+  weaknessContainer: {
+    marginBottom: 8,
+  },
+  weaknessText: {
+    fontSize: 22,
+    fontWeight: "bold",
   },
 });
